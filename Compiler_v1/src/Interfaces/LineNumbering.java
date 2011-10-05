@@ -3,8 +3,6 @@ package Interfaces;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
@@ -12,13 +10,11 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
 
 public class LineNumbering extends JScrollPane {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private static JTextArea jta;
 	private static JTextArea lines;
-
+	private boolean modify = false;
 
 	public LineNumbering() {
 		jta = new JTextArea();
@@ -61,6 +57,7 @@ public class LineNumbering extends JScrollPane {
 			@Override
 			public void insertUpdate(DocumentEvent de) {
 				lines.setText(getText());
+				modify = true;
 			}
 
 			@Override
@@ -72,6 +69,15 @@ public class LineNumbering extends JScrollPane {
 		this.getViewport().add(jta);
 		this.setRowHeaderView(lines);
 		this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	}
+
+
+	public boolean isModify() {
+		return modify;
+	}
+
+	public void setModify(boolean modify) {
+		this.modify = modify;
 	}
 
 
