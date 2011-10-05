@@ -1,0 +1,87 @@
+#Options
+GenerateScanner = true
+GenerateParser = false
+Language = Java
+ScannerName = Lexico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = String
+#RegularDefinitions
+min: [a-z]
+mai: [A-Z]
+def: {mai}{min}+
+dig: [0-9]
+
+int: [1-9]
+frac: (, ( {int} | 0)+ )
+
+letra1: [^ ' \n \\]
+letra2: [^ \" \\]
+literal1:  '( {letra1} | \\\\ | \\' )*'
+literal2: \"( {letra2} | \\\\ | \\\" )*\" 
+
+allLinha: [^\n]
+allBloco: [^ \] ]
+
+//quetão e)
+bloco: \-\- \[ {allBloco}* \]
+
+//questão d)
+linha: \-\- {allLinha}*
+
+#Tokens
+//questão a)
+identificador: {min} ( {min} | {def} )* ( _{dig}+ )?
+
+//questão b)
+real: (0 | {int} ( {int} | 0 )* )+ {frac}?
+
+//quaestão c)
+literal: {literal1} | {literal2}
+
+//ignorando
+:[\s\t\n]* | ({bloco} | {linha})*
+
+"+"
+"-"
+"*"
+"/"
+"^"
+"=="
+"~="
+"<="
+">="
+"<"
+">"
+"="
+")"
+"("
+";"
+"."
+":"
+
+ADD = identificador : "add"
+AND = identificador : "and"
+BOOLEAN = identificador : "boolean"
+CASE = identificador : "case"
+CHARACTER = identificador : "character"
+CONTINUE = identificador : "continue"
+COUNT = identificador : "count"
+DELETE = identificador : "delete"
+DO = identificador : "do"
+ELEMENTOF = identificador : "elementOf"
+ELSE = identificador : "else"
+END = identificador : "end"
+ENDIF = identificador : "endif"
+EXIT = identificador : "exit"
+FALSE = identificador : "false"
+IF = identificador : "if"
+LIST = identificador : "list"
+NOT = identificador : "not"
+NUMBER = identificador : "number"
+OR = identificador : "or"
+PROGRAM = identificador : "program"
+READ = identificador : "read"
+SIZE = identificador : "size"
+TRUE = identificador : "true"
+WRITE = identificador : "write"
