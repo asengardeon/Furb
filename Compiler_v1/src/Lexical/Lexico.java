@@ -48,7 +48,7 @@ public class Lexico implements ScannerConstants {
 			}
 		}
 		if (endState < 0 || (endState != state && tokenForState(lastState) == -2))
-			throw new LexicalError(SCANNER_ERROR[lastState], start);
+			throw new LexicalError(input.substring(start, position) + " " + SCANNER_ERROR[lastState], start);
 
 		position = end;
 

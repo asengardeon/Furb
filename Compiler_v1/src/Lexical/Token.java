@@ -22,7 +22,7 @@ public class Token {
 		if (id == Constants.IDENTIFICADOR.getId()) {
 			return Constants.IDENTIFICADOR.getClazz();
 		} else if (id == Constants.REAL.getId()) {
-			return Constants.IDENTIFICADOR.getClazz();
+			return Constants.REAL.getClazz();
 		} else if (id == Constants.LITERAL.getId()) {
 			return Constants.LITERAL.getClazz();
 		} else if (id >= Constants.MAIS.getId() && id <= Constants.DOIS_PONTOS.getId()) {
