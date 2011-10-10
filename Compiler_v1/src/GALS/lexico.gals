@@ -1,11 +1,14 @@
 #Options
 GenerateScanner = true
-GenerateParser = false
+GenerateParser = true
 Language = Java
 ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
 ScannerCaseSensitive = true
 ScannerTable = Compact
 Input = String
+Parser = LL
 #RegularDefinitions
 min: [a-z]
 mai: [A-Z]
@@ -59,6 +62,10 @@ literal: {literal1} | {literal2}
 ";"
 "."
 ":"
+"["
+"]"
+","
+
 
 ADD = identificador : "add"
 AND = identificador : "and"
@@ -85,3 +92,45 @@ READ = identificador : "read"
 SIZE = identificador : "size"
 TRUE = identificador : "true"
 WRITE = identificador : "write"
+#NonTerminals
+<program>
+<decvars>
+<decvar>
+<tipos>
+<tiposimples>
+<tipolista>
+<listaid>
+<atribuicao>
+<entrada>
+<saida>
+<listaexp>
+<loop>
+<final>
+<selecao>
+<else>
+<lista>
+<listaaux>
+<listacmd>
+<comando>
+<expressao>
+#Grammar
+<program> 	::= PROGRAM <decvars><listacmd>END;
+<decvars> 	::= <decvar> |î;
+<decvar>  	::= <tipos> ":" <listaid>";" | <tipos> ":" <listaid> ";" <decvar>;
+<tipos>   	::= <tiposimples> | <tipolista>;
+<tiposimples>	::= NUMBER | CHARACTER | BOOLEAN;
+<tipolista>	::= LIST"["<tiposimples>","real"]";
+<listaid>	::= identificador | identificador "," <listaid>;
+<atribuicao>	::= <listaid> "=" <expressao> ";";
+<entrada>	::= READ"("<listaid>")" ";";
+<saida>		::= WRITE"("<listaexp>")" ";";
+<listaexp>	::= <expressao> | <expressao>","<listaexp>;
+<loop>		::= DO<listacmd>CASE"("<expressao>")"<final>";";
+<final>		::= CONTINUE | EXIT;
+<selecao>	::= IF"("<expressao>")"<listacmd><else>ENDIF";";
+<else>		::= î | ELSE<listacmd>;
+<lista>		::= identificador"."<listaaux>";";
+<listaaux>	::= ADD"("<expressao>","<expressao>")" | DELETE"("<expressao>")";
+<listacmd>	::= <comando> | <comando><listacmd>;
+<comando>	::= <atribuicao> | <entrada> | <saida> | <loop> | <selecao> | <lista>; 	
+

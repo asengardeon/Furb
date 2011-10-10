@@ -36,10 +36,10 @@ public class Compile {
 				break;
 			}
 			
-			if (!error){
-				output.setText(output.getText() + "\n" + "Código compilado com sucesso");
-			}
 		}
 
+		if (!error){
+			output.setText(output.getText() + "\n" + "Código compilado com sucesso");
+		}
 	}
 }

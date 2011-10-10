@@ -1,68 +1,52 @@
-package Lexical;
+public interface Constants extends ScannerConstants
+{
+    int EPSILON  = 0;
+    int DOLLAR   = 1;
 
-public enum Constants {
+    int t_identificador = 2;
+    int t_real = 3;
+    int t_literal = 4;
+    int t_TOKEN_5 = 5; //"+"
+    int t_TOKEN_6 = 6; //"-"
+    int t_TOKEN_7 = 7; //"*"
+    int t_TOKEN_8 = 8; //"/"
+    int t_TOKEN_9 = 9; //"^"
+    int t_TOKEN_10 = 10; //"=="
+    int t_TOKEN_11 = 11; //"~="
+    int t_TOKEN_12 = 12; //"<="
+    int t_TOKEN_13 = 13; //">="
+    int t_TOKEN_14 = 14; //"<"
+    int t_TOKEN_15 = 15; //">"
+    int t_TOKEN_16 = 16; //"="
+    int t_TOKEN_17 = 17; //")"
+    int t_TOKEN_18 = 18; //"("
+    int t_TOKEN_19 = 19; //";"
+    int t_TOKEN_20 = 20; //"."
+    int t_TOKEN_21 = 21; //":"
+    int t_ADD = 22;
+    int t_AND = 23;
+    int t_BOOLEAN = 24;
+    int t_CASE = 25;
+    int t_CHARACTER = 26;
+    int t_CONTINUE = 27;
+    int t_COUNT = 28;
+    int t_DELETE = 29;
+    int t_DO = 30;
+    int t_ELEMENTOF = 31;
+    int t_ELSE = 32;
+    int t_END = 33;
+    int t_ENDIF = 34;
+    int t_EXIT = 35;
+    int t_FALSE = 36;
+    int t_IF = 37;
+    int t_LIST = 38;
+    int t_NOT = 39;
+    int t_NUMBER = 40;
+    int t_OR = 41;
+    int t_PROGRAM = 42;
+    int t_READ = 43;
+    int t_SIZE = 44;
+    int t_TRUE = 45;
+    int t_WRITE = 46;
 
-	EPSILON(0, "identificador"), //
-	DOLLAR(1, "identificador"), //
-	IDENTIFICADOR(2, "identificador"), //
-	REAL(3, "constante real"), //
-	LITERAL(4, "constante literal"), //
-	MAIS(5, "simbolo especial"), //
-	MENOS(6, "simbolo especial"), //
-	MULT(7, "simbolo especial"), //
-	BARRA(8, "simbolo especial"), //
-	CIRCUNFLEXO(9, "simbolo especial"), //
-	COMPARAR(10, "simbolo especial"), //
-	DIFERENTE(11, "simbolo especial"), //
-	MENOR_IGUAL(12, "simbolo especial"), //
-	MAIOR_IGUAL(13, "simbolo especial"), //
-	MENOR(14, "simbolo especial"), //
-	MAIOR(15, "simbolo especial"), //
-	IGUAL(16, "simbolo especial"), //
-	FECHA_PARENTESE(17, "simbolo especial"), //
-	ABRE_PARENTESE(18, "simbolo especial"), //
-	PONTO_VIRGULA(19, "simbolo especial"), //
-	PONTO(20, "simbolo especial"), //
-	DOIS_PONTOS(21, "simbolo especial"), //
-	ADD(22, "palavra reservada"), //
-	AND(23, "palavra reservada"), //
-	BOOLEAN(24, "palavra reservada"), //
-	CASE(25, "palavra reservada"), //
-	CHARACTER(26, "palavra reservada"), //
-	CONTINUE(27, "palavra reservada"), //
-	COUNT(28, "palavra reservada"), //
-	DELETE(29, "palavra reservada"), //
-	DO(30, "palavra reservada"), //
-	ELEMENTOF(31, "palavra reservada"), //
-	ELSE(32, "palavra reservada"), //
-	END(33, "palavra reservada"), //
-	ENDIF(34, "palavra reservada"), //
-	EXIT(35, "palavra reservada"), //
-	FALSE(36, "palavra reservada"), //
-	IF(37, "palavra reservada"), //
-	LIST(38, "palavra reservada"), //
-	NOT(39, "palavra reservada"), //
-	NUMBER(40, "palavra reservada"), //
-	OR(41, "palavra reservada"), //
-	PROGRAM(42, "palavra reservada"), //
-	READ(43, "palavra reservada"), //
-	SIZE(44, "palavra reservada"), //
-	TRUE(45, "palavra reservada"), //
-	WRITE(46, "palavra reservada");
-
-	private int id;
-	private String clazz;
-
-	private Constants(int id, String clazz) {
-		this.id = id;
-		this.clazz = clazz;
-	}
-	
-	public int getId(){
-		return id;
-	}
-	
-	public String getClazz(){
-		return clazz;
-	}
 }
