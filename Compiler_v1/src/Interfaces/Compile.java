@@ -11,35 +11,20 @@ public class Compile {
 	public static void compile(String source, JTextArea output) {
 
 		output.setText("");
-		
-		String[] linesSource = source.split("\n");
-		boolean error = false;
-		
-		for (int i = 0; i < linesSource.length; i++) {
 
-			Lexico lexico = new Lexico();
-			lexico.setInput(linesSource[i]);
+		Lexico lexico = new Lexico();
+		lexico.setInput(source);
 
-			Token token = null;
-			try {
-
+		Token token;
+		try {
+			token = lexico.nextToken();
+			while (token != null){
+				output.setText(output.getText() + "\n" + token.getPosition() + " " + token.getTokenClass() + "   " + token.getLexeme());
 				token = lexico.nextToken();
-
-				while (token != null) {
-					output.setText(output.getText() + "\n" + (i + 1) + "	"  + token.getTokenClass() + "	" + token.getLexeme());
-					token = lexico.nextToken();
-				}
-
-			} catch (LexicalError e) {
-				output.setText("Erro na linha " + (i + 1) + " - " + e.getMessage());
-				error = true;
-				break;
 			}
-			
+		} catch (LexicalError e) {
+			output.setText(e.getMessage());
 		}
 
-		if (!error){
-			output.setText(output.getText() + "\n" + "Código compilado com sucesso");
-		}
 	}
 }
