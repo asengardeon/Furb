@@ -1,5 +1,7 @@
 package Lexical;
 
+import Utils.AnalysisError;
+
 public class LexicalError extends AnalysisError {
 	
 	private static final long serialVersionUID = 1L;

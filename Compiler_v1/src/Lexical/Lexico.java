@@ -1,6 +1,9 @@
 package Lexical;
 
-public class Lexico implements ScannerConstants {
+import Utils.ScannerConstants;
+import Utils.Token;
+
+public class Lexico implements ScannerConstants  {
 
 	private int position;
 	private String input;

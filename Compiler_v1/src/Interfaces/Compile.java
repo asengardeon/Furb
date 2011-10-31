@@ -4,7 +4,7 @@ import javax.swing.JTextArea;
 
 import Lexical.LexicalError;
 import Lexical.Lexico;
-import Lexical.Token;
+import Utils.Token;
 
 public class Compile {
 

@@ -49,6 +49,7 @@ literal: {literal1} | {literal2}
 "-"
 "*"
 "/"
+"^"
 "=="
 "~="
 "<="
@@ -59,6 +60,7 @@ literal: {literal1} | {literal2}
 ")"
 "("
 ";"
+"."
 ":"
 "["
 "]"
@@ -100,65 +102,42 @@ WRITE = identificador : "write"
 <tipolista>
 <listaid>
 <listaid1>
+<atribuicao>
 <entrada>
 <saida>
 <listaexp>
-<listaexp1>
 <loop>
 <final>
 <selecao>
 <else>
+<lista>
 <listaaux>
 <listacmd>
 <listacmd1>
 <comando>
 <comando1> 
 <expressao>
-<expressao1>
-<valor>
-<relacional>
-<relacional1>
-<termo>
-<termo1>
-<aritmetica>
-<aritmetica1>
-<elemento_expressao>
-<operador_relacional>
-<identificadores>
-
 #Grammar
-<program> 		::= PROGRAM <decvars><listacmd>END;
-<decvars> 		::= <decvar> |î;
-<decvar>  		::= <tipos>":"<listaid>";"<decvar1>;
-<decvar1>		::= î | <decvar>;
-<tipos>   		::= <tiposimples> | <tipolista>;
-<tiposimples>		::= NUMBER | CHARACTER | BOOLEAN;
-<tipolista>		::= LIST"["<tiposimples>","real"]";
-<listaid>		::= identificador <listaid1>;
-<listaid1>		::= î | "," <listaid>;
-<entrada>		::= READ"("<listaid>")" ";";
-<saida>			::= WRITE"("<listaexp>")" ";";
-<listaexp>		::= <expressao><listaexp1>;
-<listaexp1>		::= î | ","<listaexp>;
-<loop>			::= DO<listacmd>CASE"("<expressao>")"<final>";";
-<final>			::= CONTINUE | EXIT;
-<selecao>		::= IF"("<expressao>")"<listacmd><else>ENDIF";";
-<else>			::= î | ELSE<listacmd>;
-<listaaux>		::= ADD"("<expressao>","<expressao>")" | DELETE"("<expressao>")";
-<listacmd>		::= <comando><listacmd1>;
-<listacmd1>		::= î | <listacmd>;
-<comando>		::= identificador<comando1> | <entrada> | <saida> | <loop> | <selecao>;
-<comando1> 		::= <listaid1> "=" <expressao> ";" |<listaaux>";";
-<expressao>		::= <valor> <expressao1>;
-<expressao1>		::= î |  AND <valor> <expressao1> | OR <valor> <expressao1>; 
-<valor>			::= <relacional> | TRUE | FALSE | NOT <valor>;
-<relacional>		::= <aritmetica> <relacional1>;
-<relacional1>		::= <operador_relacional> <aritmetica> | î;
-<operador_relacional> 	::= "==" | "~=" | "<" | "<=" | ">" | ">=" ;
-<aritmetica>		::= <termo><aritmetica1>;
-<aritmetica1>		::= î| "+" <termo> <aritmetica1>| "-" <termo><aritmetica1>;
-<termo>			::= <elemento_expressao><termo1>;
-<termo1>		::= î | "*"<elemento_expressao> <termo1>	| "/" <elemento_expressao><termo1>; 
-<elemento_expressao>	::= identificador<identificadores> | real | literal | "("<expressao>")" | "+"<elemento_expressao> | "-"<elemento_expressao>;
-<identificadores>	::= î | COUNT | SIZE | ELEMENTOF "("<expressao>")" ;
-
+<program> 	::= PROGRAM <decvars><listacmd>END;
+<decvars> 	::= <decvar> |î;
+<decvar>  	::= <tipos>":"<listaid>";"<decvar1>;
+<decvar1>	::= î | <decvar>;
+<tipos>   	::= <tiposimples> | <tipolista>;
+<tiposimples>	::= NUMBER | CHARACTER | BOOLEAN;
+<tipolista>	::= LIST"["<tiposimples>","real"]";
+<listaid>	::= identificador <listaid1>;
+<listaid1>	::= î | "," <listaid>;
+<atribuicao>	::= <listaid> "=" <expressao> ";";
+<entrada>	::= READ"("<listaid>")" ";";
+<saida>		::= WRITE"("<listaexp>")" ";";
+<listaexp>	::= <expressao> | <expressao>","<listaexp>;
+<loop>		::= DO<listacmd>CASE"("<expressao>")"<final>";";
+<final>		::= CONTINUE | EXIT;
+<selecao>	::= IF"("<expressao>")"<listacmd><else>ENDIF";";
+<else>		::= î | ELSE<listacmd>;
+<lista>		::= identificador"."<listaaux>";";
+<listaaux>	::= ADD"("<expressao>","<expressao>")" | DELETE"("<expressao>")";
+<listacmd>	::= <comando><listacmd1>;
+<listacmd1>	::= î | <listacmd>;
+<comando>	::= identificador<comando1> | <entrada> | <saida> | <loop> | <selecao>;
+<comando1> 	::= <listaid1> "=" <expressao> ";" |"."<listaaux>";";
