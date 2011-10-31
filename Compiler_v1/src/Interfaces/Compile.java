@@ -4,6 +4,10 @@ import javax.swing.JTextArea;
 
 import Lexical.LexicalError;
 import Lexical.Lexico;
+import Semantic.SemanticError;
+import Semantic.Semantico;
+import Syntatic.Sintatico;
+import Syntatic.SyntaticError;
 import Utils.Token;
 
 public class Compile {
@@ -14,8 +18,24 @@ public class Compile {
 
 		Lexico lexico = new Lexico();
 		lexico.setInput(source);
+		Sintatico sintatico = new Sintatico();
+		Semantico semantico = new Semantico();
+		
+		try {
+			sintatico.parse(lexico, semantico);
+		} catch (LexicalError e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SyntaticError e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SemanticError e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+				
 
-		Token token;
+		/**Token token;
 		try {
 			token = lexico.nextToken();
 			while (token != null){
@@ -25,6 +45,6 @@ public class Compile {
 		} catch (LexicalError e) {
 			output.setText(e.getMessage());
 		}
-
+		*/
 	}
 }
