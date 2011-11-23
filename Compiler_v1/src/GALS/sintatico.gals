@@ -127,38 +127,38 @@ WRITE = identificador : "write"
 <identificadores>
 
 #Grammar
-<program> 		::= PROGRAM <decvars><listacmd>END;
+<program> 		::= #1 PROGRAM <decvars><listacmd>END #2;
 <decvars> 		::= <decvar> |î;
-<decvar>  		::= <tipos>":"<listaid>";"<decvar1>;
+<decvar>  		::= <tipos>":"<listaid> #3 ";"<decvar1>;
 <decvar1>		::= î | <decvar>;
-<tipos>   		::= <tiposimples> | <tipolista>;
+<tipos>   		::= <tiposimples> #4 | <tipolista>;
 <tiposimples>		::= NUMBER | CHARACTER | BOOLEAN;
-<tipolista>		::= LIST"["<tiposimples>","real"]";
-<listaid>		::= identificador <listaid1>;
+<tipolista>		::= LIST"["<tiposimples> #31 "," real #32 "]";
+<listaid>		::= identificador #5 <listaid1>;
 <listaid1>		::= î | "," <listaid>;
-<entrada>		::= READ"("<listaid>")" ";";
+<entrada>		::= READ"("<listaid>")" #7 ";";
 <saida>			::= WRITE"("<listaexp>")" ";";
-<listaexp>		::= <expressao><listaexp1>;
+<listaexp>		::= <expressao> #8 <listaexp1>;
 <listaexp1>		::= î | ","<listaexp>;
-<loop>			::= DO<listacmd>CASE"("<expressao>")"<final>";";
-<final>			::= CONTINUE | EXIT;
-<selecao>		::= IF"("<expressao>")"<listacmd><else>ENDIF";";
-<else>			::= î | ELSE<listacmd>;
+<loop>			::= #12 DO<listacmd>CASE"("<expressao>")"<final>";";
+<final>			::= #13 CONTINUE | #14 EXIT;
+<selecao>		::= IF"("<expressao>")" #9 <listacmd><else>ENDIF";" #10 ;
+<else>			::= î | #11 ELSE<listacmd>;
 <listaaux>		::= ADD"("<expressao>","<expressao>")" | DELETE"("<expressao>")";
 <listacmd>		::= <comando><listacmd1>;
 <listacmd1>		::= î | <listacmd>;
 <comando>		::= identificador<comando1> | <entrada> | <saida> | <loop> | <selecao>;
-<comando1> 		::= <listaid1> "=" <expressao> ";" |<listaaux>";";
+<comando1> 		::= <listaid1> "=" <expressao> #6 ";" |<listaaux>";";
 <expressao>		::= <valor> <expressao1>;
-<expressao1>		::= î |  AND <valor> <expressao1> | OR <valor> <expressao1>; 
-<valor>			::= <relacional> | TRUE | FALSE | NOT <valor>;
+<expressao1>		::= î |  AND <valor> #15 <expressao1> | OR <valor> #16 <expressao1>; 
+<valor>			::= <relacional> | TRUE #17 | FALSE #18 | NOT <valor> #19;
 <relacional>		::= <aritmetica> <relacional1>;
-<relacional1>		::= <operador_relacional> <aritmetica> | î;
+<relacional1>		::= <operador_relacional> #20 <aritmetica> #21 | î;
 <operador_relacional> 	::= "==" | "~=" | "<" | "<=" | ">" | ">=" ;
 <aritmetica>		::= <termo><aritmetica1>;
-<aritmetica1>		::= î| "+" <termo> <aritmetica1>| "-" <termo><aritmetica1>;
+<aritmetica1>		::= î| "+" <termo> #22 <aritmetica1>| "-" <termo> #23 <aritmetica1>;
 <termo>			::= <elemento_expressao><termo1>;
-<termo1>		::= î | "*"<elemento_expressao> <termo1>	| "/" <elemento_expressao><termo1>; 
-<elemento_expressao>	::= identificador<identificadores> | real | literal | "("<expressao>")" | "+"<elemento_expressao> | "-"<elemento_expressao>;
-<identificadores>	::= î | COUNT | SIZE | ELEMENTOF "("<expressao>")" ;
+<termo1>		::= î | "*"<elemento_expressao> #24 <termo1> | "/" <elemento_expressao> #25 <termo1>; 
+<elemento_expressao>	::= identificador #5 <identificadores> | real #27 | literal #28 | "("<expressao>")" | "+"<elemento_expressao> #29 | "-"<elemento_expressao> #30;
+<identificadores>	::= î #26 | COUNT #36 | SIZE #37 | ELEMENTOF "("<expressao> #38 ")" ;
 
