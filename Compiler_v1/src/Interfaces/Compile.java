@@ -8,13 +8,29 @@ import Semantic.SemanticError;
 import Semantic.Semantico;
 import Syntatic.Sintatico;
 import Syntatic.SyntaticError;
-import Utils.Token;
 
 public class Compile {
 
 	public static void compile(String source, JTextArea output) {
 
+//		output.setText("");
+//
+//		Lexico lexico = new Lexico();
+//		lexico.setInput(source);
+//
+//		Token token;
+//		try {
+//			token = lexico.nextToken();
+//			while (token != null){
+//				output.setText(output.getText() + "\n" + token.getPosition() + " " + token.getTokenClass() + "   " + token.getLexeme());
+//				token = lexico.nextToken();
+//			}
+//		} catch (LexicalError e) {
+//			output.setText(e.getMessage());
+//		}
+//		
 		output.setText("");
+
 
 		Lexico lexico = new Lexico();
 		lexico.setInput(source);
@@ -23,28 +39,13 @@ public class Compile {
 		
 		try {
 			sintatico.parse(lexico, semantico);
-		} catch (LexicalError e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SyntaticError e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SemanticError e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-				
-
-		/**Token token;
-		try {
-			token = lexico.nextToken();
-			while (token != null){
-				output.setText(output.getText() + "\n" + token.getPosition() + " " + token.getTokenClass() + "   " + token.getLexeme());
-				token = lexico.nextToken();
-			}
+			output.setText("programa compilado com sucesso!");
 		} catch (LexicalError e) {
 			output.setText(e.getMessage());
+		} catch (SyntaticError e) {
+			output.setText(e.getMessage());
+		} catch (SemanticError e) {
+			output.setText("Não implementado");
 		}
-		*/
 	}
 }

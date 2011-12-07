@@ -7,11 +7,11 @@ import Lexical.Lexico;
 import Semantic.SemanticError;
 import Semantic.Semantico;
 import Utils.Constants;
-import Utils.ParserConstants;
 import Utils.Token;
+import Utils.ParserConstants;
 
 public class Sintatico {
-	
+
 	private Stack stack = new Stack();
 	private Token currentToken;
 	private Token previousToken;
@@ -35,7 +35,8 @@ public class Sintatico {
 		if (currentToken == null) {
 			int pos = 0;
 			if (previousToken != null) {
-				pos = previousToken.getPosition() + previousToken.getLexeme().length();
+				pos = previousToken.getPosition()
+						+ previousToken.getLexeme().length();
 			}
 			Constants enume = Utils.Constants.DOLLAR;
 			currentToken = new Token(enume.getId(), "$", pos);
@@ -46,11 +47,11 @@ public class Sintatico {
 
 		if (x == Utils.Constants.EPSILON.ordinal()) {
 			return false;
-			
+
 		} else if (isTerminal(x)) {
-			
+
 			if (x == a) {
-				
+
 				if (stack.empty())
 					return true;
 				else {
@@ -58,30 +59,43 @@ public class Sintatico {
 					currentToken = scanner.nextToken();
 					return false;
 				}
-				
+
 			} else {
-				throw new SyntaticError(Utils.ParserConstants.PARSER_ERROR[x], currentToken.getPosition());
+				throw new SyntaticError("Encontrado " + getLexemeToException()
+						+ " " + Utils.ParserConstants.PARSER_ERROR[x],
+						currentToken.getPosition());
 			}
-			
+
 		} else if (isNonTerminal(x)) {
-			
+
 			if (pushProduction(x, a)) {
 				return false;
-			} else { 
-				throw new SyntaticError(Utils.ParserConstants.PARSER_ERROR[x], currentToken.getPosition());
+			} else {
+				throw new SyntaticError("encontrado " + getLexemeToException()
+						+ ", " + Utils.ParserConstants.PARSER_ERROR[x],
+						currentToken.getPosition());
 			}
-			
+
 		} else {
-			// isSemanticAction(x)
-			// TODO: Não implementado Ainda
-			// semanticAnalyser.executeAction(x- FIRST_SEMANTIC_ACTION, previousToken);
+			isSemanticAction(x);
+			semanticAnalyser.executeAction(x - ParserConstants.FIRST_SEMANTIC_ACTION, previousToken);
 			return false;
 		}
 	}
 
+	private String getLexemeToException() {
+		String lexeme = currentToken.getLexeme();
+
+		if (lexeme.contains("$")) {
+			lexeme = lexeme.replace("$", "fim de arquivo ou programas");
+		}
+		return lexeme;
+	}
+
 	private boolean pushProduction(int topStack, int tokenInput) {
-		int p = Utils.ParserConstants.PARSER_TABLE[topStack - Utils.ParserConstants.FIRST_NON_TERMINAL][tokenInput - 1];
-		
+		int p = Utils.ParserConstants.PARSER_TABLE[topStack
+				- Utils.ParserConstants.FIRST_NON_TERMINAL][tokenInput - 1];
+
 		if (p >= 0) {
 			int[] production = Utils.ParserConstants.PRODUCTIONS[p];
 			// empilha a produção em ordem reversa
@@ -102,7 +116,7 @@ public class Sintatico {
 		stack.push(new Integer(Utils.ParserConstants.START_SYMBOL));
 
 		currentToken = scanner.nextToken();
-
+		
 		while (!step());
 	}
 }

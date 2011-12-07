@@ -4,7 +4,7 @@ public class AnalysisError extends Exception {
 	private int position;
 
 	public AnalysisError(String msg, int position) {
-		super(msg);
+		super(String.format("Erro na linha %d - %s", position, msg));
 		this.position = position;
 	}
 
